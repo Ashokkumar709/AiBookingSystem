@@ -1,5 +1,5 @@
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain_community.embeddings import HuggingFaceEmbeddings
 
@@ -12,8 +12,8 @@ def build_rag(pdf_paths):
         documents.extend(loader.load())
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000,
-        chunk_overlap=150
+        chunk_size=800,
+        chunk_overlap=100
     )
 
     docs = splitter.split_documents(documents)
@@ -23,5 +23,4 @@ def build_rag(pdf_paths):
     )
 
     vectorstore = FAISS.from_documents(docs, embeddings)
-
     return vectorstore
