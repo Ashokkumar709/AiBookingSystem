@@ -5,7 +5,7 @@ to handle document-based Q&A and appointment bookings with an admin dashboard.
 
 ---
 
-##  Features
+## ✨ Features
 
 - 💬 Conversational booking assistant
 - 📄 PDF-based Q&A using RAG
@@ -46,60 +46,101 @@ AI-Booking-Assistant/
 ├── README.md
 └── .gitignore
 
-
 ---
 
 ## ⚙️ Setup Instructions
 
 ### 1️⃣ Clone the Repository
-```bash
-git clone https://github.com/Ashokkumar709/AiBookingSystem.git
-cd AiBookingSystem
-```
 
-2️⃣ Install Dependencies
+git clone https://github.com/Ashokkumar709/AiBookingSystem.git  
+cd AiBookingSystem
+
+### 2️⃣ Install Dependencies
+
 pip install -r requirements.txt
 
-3️⃣ Configure Secrets
+### 3️⃣ Configure Secrets
+
 Create the file:
+
 .streamlit/secrets.toml
-Inside secrets file
-GROQ_API_KEY = "your_groq_api_key"
-EMAIL_USER = "your_email@gmail.com"
+
+Add the following inside:
+
+GROQ_API_KEY = "your_groq_api_key"  
+EMAIL_USER = "your_email@gmail.com"  
 EMAIL_PASSWORD = "your_gmail_app_password"
 
-▶️ Run the Application
- streamlit run app.py
+⚠️ For Gmail, you must use an App Password, not your normal email password.
 
-🧪 How to Test the Application
-🔹 Test PDF-Based Q&A (RAG)
-Upload a text-based PDF
-Ask questions related to the document
-The system retrieves relevant chunks and answers using the LLM.
+---
 
-🔹 Test Booking Flow
+## ▶️ Run the Application
+
+streamlit run app.py
+
+---
+
+## 🧪 How to Test the Application
+
+### 🔹 Test PDF-Based Q&A (RAG)
+
+- Upload a text-based PDF
+- Ask questions related to the document
+- The system retrieves relevant chunks and answers using the LLM
+
+---
+
+### 🔹 Test Booking Flow
+
 Type:
+
 Book an appointment
-Provide details step-by-step:
-Name
-Email
-Phone number
-Service type
-Date and time
-Review booking summary
-Confirm booking
-Receive confirmation email
 
+Then provide details step-by-step:
 
-🔐 Admin Dashboard Testing
-🔑 Admin Login Credentials
-Use the following credentials to access the admin dashboard:
-Username: admin
+- Name
+- Email
+- Phone number
+- Service type
+- Date and time
+
+Review the booking summary and confirm.  
+You will receive a confirmation email after successful booking.
+
+---
+
+## 🔐 Admin Dashboard Testing
+
+### 🔑 Admin Login Credentials
+
+Username: admin  
 Password: password123
-🧭 Accessing the Admin Dashboard
-Open the sidebar
-Select Admin Dashboard
-Login using the credentials above
-View all bookings
-Cancel bookings (email notification is sent automatically)
 
+---
+
+### 🧭 Accessing the Admin Dashboard
+
+- Open the sidebar in the Streamlit app
+- Select Admin Dashboard
+- Login using the credentials above
+- View all bookings
+- Cancel bookings (email notification is sent automatically)
+
+---
+
+## 📌 Notes
+
+- PDF files must contain selectable text (not scanned images).
+- SQLite database is stored locally.
+- Email requires valid SMTP credentials.
+
+---
+
+## 🚀 Future Improvements
+
+- OAuth-based admin authentication
+- Google Calendar integration
+- Multi-admin roles
+- Cloud database (PostgreSQL / Firebase)
+- Deployment on Streamlit Cloud / AWS
