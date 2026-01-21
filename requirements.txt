@@ -1,8 +1,7 @@
 streamlit
-langchain
-langchain-community
-langchain-groq
+langchain>=0.1.17
+langchain-community>=0.0.25
 faiss-cpu
 sentence-transformers
-pandas
-python-pptx
+langchain-groq
+pypdf
