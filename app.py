@@ -287,7 +287,8 @@ if user_input:
 
         if "vs" in st.session_state:
             docs = st.session_state.vs.similarity_search(user_input, k=3)
-            context = "\n".join(d.page_content for d in docs)
+            context = "\n".join(docs)
+
 
             prompt = f"""
 You are a helpful AI assistant.
