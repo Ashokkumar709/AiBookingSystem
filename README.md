@@ -41,7 +41,65 @@ AI-Booking-Assistant/
 ├── intent.py
 ├── rag_tool.py
 ├── .streamlit/
-│ └── secrets.toml.example
+│   └── secrets.toml.example
 ├── requirements.txt
 ├── README.md
 └── .gitignore
+
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/Ashokkumar709/AiBookingSystem.git
+cd AiBookingSystem
+```
+
+2️⃣ Install Dependencies
+pip install -r requirements.txt
+
+3️⃣ Configure Secrets
+Create the file:
+.streamlit/secrets.toml
+Inside secrets file
+GROQ_API_KEY = "your_groq_api_key"
+EMAIL_USER = "your_email@gmail.com"
+EMAIL_PASSWORD = "your_gmail_app_password"
+
+▶️ Run the Application
+ streamlit run app.py
+
+🧪 How to Test the Application
+🔹 Test PDF-Based Q&A (RAG)
+Upload a text-based PDF
+Ask questions related to the document
+The system retrieves relevant chunks and answers using the LLM.
+
+🔹 Test Booking Flow
+Type:
+Book an appointment
+Provide details step-by-step:
+Name
+Email
+Phone number
+Service type
+Date and time
+Review booking summary
+Confirm booking
+Receive confirmation email
+
+
+🔐 Admin Dashboard Testing
+🔑 Admin Login Credentials
+Use the following credentials to access the admin dashboard:
+Username: admin
+Password: password123
+🧭 Accessing the Admin Dashboard
+Open the sidebar
+Select Admin Dashboard
+Login using the credentials above
+View all bookings
+Cancel bookings (email notification is sent automatically)
+
