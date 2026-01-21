@@ -1,26 +1,45 @@
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from pypdf import PdfReader
+from sentence_transformers import SentenceTransformer
+import faiss
+import os
+
+
+def simple_text_splitter(text, chunk_size=800, overlap=100):
+    chunks = []
+    start = 0
+    while start < len(text):
+        end = start + chunk_size
+        chunks.append(text[start:end])
+        start = end - overlap
+    return chunks
+
+
+class SimpleVectorStore:
+    def __init__(self, texts, embeddings, index):
+        self.texts = texts
+        self.embeddings = embeddings
+        self.index = index
+
+    def similarity_search(self, query, k=3):
+        query_emb = self.embeddings.encode([query])
+        distances, indices = self.index.search(query_emb, k)
+        return [self.texts[i] for i in indices[0]]
 
 
 def build_rag(pdf_paths):
-    documents = []
+    all_text = ""
 
     for path in pdf_paths:
-        loader = PyPDFLoader(path)
-        documents.extend(loader.load())
+        reader = PdfReader(path)
+        for page in reader.pages:
+            all_text += page.extract_text() or ""
 
-    splitter = RecursiveCharacterTextSplitter(
-        chunk_size=800,
-        chunk_overlap=100
-    )
+    chunks = simple_text_splitter(all_text)
 
-    docs = splitter.split_documents(documents)
+    model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = model.encode(chunks)
 
-    embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
-    )
+    index = faiss.IndexFlatL2(embeddings.shape[1])
+    index.add(embeddings)
 
-    vectorstore = FAISS.from_documents(docs, embeddings)
-    return vectorstore
+    return SimpleVectorStore(chunks, model, index)

@@ -1,6 +1,5 @@
 streamlit
-langchain-community
 faiss-cpu
 sentence-transformers
-langchain-groq
 pypdf
+langchain-groq
